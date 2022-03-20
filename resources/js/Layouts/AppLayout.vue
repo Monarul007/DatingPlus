@@ -228,7 +228,7 @@
                 <slot></slot>
             </main>
 
-            <div v-if="$page.props.isMobile" class="w-full h-screen">
+            <div v-if="$page.props.isMobile" class="w-full h-16">
                 <!-- <section id="bottom-navigation" class="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"> // if shown only tablet/mobile-->
                 <section id="bottom-navigation" class="block fixed inset-x-0 bottom-0 z-10 bg-white shadow">
                     <div id="tabs" class="flex justify-between">
