@@ -1,7 +1,7 @@
 <template>
     <div>
         <Head :title="title" />
-
+        <div id="dropdown" />
         <jet-banner />
 
         <div class="min-h-screen bg-gray-100">
@@ -225,6 +225,9 @@
 
             <!-- Page Content -->
             <main>
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <flash-messages />
+                </div>
                 <slot></slot>
             </main>
 
@@ -314,6 +317,7 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
+    import FlashMessages from '@/Shared/FlashMessages.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
@@ -325,6 +329,7 @@
             Head,
             JetApplicationMark,
             JetBanner,
+            FlashMessages,
             JetDropdown,
             JetDropdownLink,
             JetNavLink,

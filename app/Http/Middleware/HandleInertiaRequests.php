@@ -40,6 +40,22 @@ class HandleInertiaRequests extends Middleware
             // Synchronously
             'isMobile' => (new \Jenssegers\Agent\Agent())->isMobile(),
             'isDesktop' => (new \Jenssegers\Agent\Agent())->isDesktop(),
+
+            'auth' => function () use ($request) {
+                return [
+                    'user' => $request->user() ? [
+                        'id' => $request->user()->id,
+                        'name' => $request->user()->first_name,
+                        'email' => $request->user()->email,
+                    ] : null,
+                ];
+            },
+            'flash' => function () use ($request) {
+                return [
+                    'success' => $request->session()->get('success'),
+                    'error' => $request->session()->get('error'),
+                ];
+            },
         ]);
     }
 }
