@@ -40,9 +40,13 @@
         "webpack-node-externals": "^3.0.0"
     },
     "dependencies": {
+<<<<<<< HEAD
         "@headlessui/vue": "^1.5.0",
         "@heroicons/vue": "^1.0.6",
         "flowbite": "^1.4.0",
         "tailwindcss-animation-delay": "^1.0.7"
+=======
+        "flowbite": "^1.4.0"
+>>>>>>> c2d3493ba610dbd6ad909894893df04eab85f08c
     }
 }

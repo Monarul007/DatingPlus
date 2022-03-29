@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pH7CMS;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Http;
 
 class UsersController extends Controller
 {
@@ -51,16 +53,32 @@ class UsersController extends Controller
             'photo' => ['nullable', 'image'],
         ]);
 
-        User::create([
-            'name' => Request::get('name'),
-            // 'last_name' => Request::get('last_name'),
-            'email' => Request::get('email'),
-            'password' => Hash::make(Request::get('password')),
-            // 'owner' => Request::get('owner'),
-            // 'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
-        ]);
+        // User::create([
+        //     'name' => Request::get('name'),
+        //     // 'last_name' => Request::get('last_name'),
+        //     'email' => Request::get('email'),
+        //     'password' => Hash::make(Request::get('password')),
+        //     // 'owner' => Request::get('owner'),
+        //     // 'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
+        // ]);
+        // https://hushcupid.com/api/user/login/?private_api_key=7f894bce14da9fb1c1f0bc10948273849c6807ae&url=hushcupid.com
 
-        return Redirect::route('users')->with('success', 'User created.');
+        // $response = Http::get('http://hushcupid.com/api/user/user/220/?private_api_key=7f894bce14da9fb1c1f0bc10948273849c6807ae&url=hushcupid.com');
+
+        $data = array(
+            'email' => 'myemail@hizup.uk',
+            'password' => '123456pH7CMS89'  
+        );
+        $url = "https://development.hushcupid.com/api/user/login/?private_api_key=ef45e5cd5bcbdd3c4a1c9c55eaa86ff9f722b347&url=ph7cms.com";
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post($url, [
+            'headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json'],
+            'body'    => json_encode($data)
+        ]);
+         
+        // print_r(json_decode($response->getBody(), true));
+
+        return Redirect::route('users')->with('success', json_decode($response->getBody(), true));
     }
 
     public function edit(User $user)
