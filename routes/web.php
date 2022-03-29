@@ -4,6 +4,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Request;
+use App\Models\User;
+use Illuminate\Http\Request as HttpRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +20,37 @@ use App\Http\Controllers\UsersController;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    if(Auth::check()){
+        return Redirect::route('users');
+    }else{
+        return Inertia::render('Welcome', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+            'step' => session('step'),
+        ]);
+    }
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'users' => User::query()
+                ->when(Request::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->paginate(10)
+                ->withQueryString()
+                ->through(fn($user) => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'created_at' => $user->created_at,
+                    'active_status' => $user->active_status
+                ]),
+
+        'filters' => Request::only(['search'])
+    ]);
 })->name('dashboard');
 
 // Users
@@ -58,3 +82,26 @@ Route::delete('users/{user}', [UsersController::class, 'destroy'])
 Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->name('users.restore')
     ->middleware('auth');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/pricing', function () {
+    return Inertia::render('Pricing');
+})->name('pricing');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/checkout', function () {
+    return Inertia::render('Checkout', [
+        'name' => Auth::user()->name,
+        'email' => Auth::user()->email,
+        'intent' => auth()->user()->createSetupIntent(),
+    ]);
+})->name('checkout');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/subscribe', function (HttpRequest $request) {
+    // dd($request->all());
+    auth()->user()->newSubscription('cashier', $request->plan)->create($request->paymentMethod);
+
+    return Redirect::route('dashboard');
+})->name('subscribe.post');
+
+Route::get('/billing-portal', function (HttpRequest $request) {
+    return $request->user()->redirectToBillingPortal(route('dashboard'));
+});

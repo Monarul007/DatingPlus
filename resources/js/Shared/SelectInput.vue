@@ -4,7 +4,7 @@
     <select :id="id" ref="input" v-model="selected" v-bind="{ ...$attrs, class: null }" class="form-select" :class="{ error: error }">
       <slot />
     </select>
-    <div v-if="error" class="form-error">{{ error }}</div>
+    <div v-if="error" class="form-error text-red-600">{{ error }}</div>
   </div>
 </template>
 
