@@ -106,6 +106,6 @@ Route::get('/billing-portal', function (HttpRequest $request) {
     return $request->user()->redirectToBillingPortal(route('dashboard'));
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/profile/step1', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('user/profile/step1', function () {
     return Inertia::render('Profile/StepOne');
 })->name('profile.step1');
