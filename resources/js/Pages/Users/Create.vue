@@ -5,7 +5,7 @@
       <Link class="text-indigo-400 hover:text-indigo-600" href="/users">Users</Link>
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
-    <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
+    <div class="animate-fade-in-up max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
           <text-input v-model="form.name" :error="form.errors.name" class="pb-8 pr-6 w-full lg:w-1/2" label="First name" />
@@ -23,6 +23,7 @@
         </div>
       </form>
     </div>
+    <slide-over />
   </div>
 </template>
 
@@ -30,6 +31,7 @@
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import FileInput from '@/Shared/FileInput'
+import SlideOver from '@/Shared/SlideOver'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
@@ -42,6 +44,7 @@ export default {
     LoadingButton,
     SelectInput,
     TextInput,
+    SlideOver,
   },
   layout: AppLayout,
   remember: 'form',

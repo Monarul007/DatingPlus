@@ -28,7 +28,9 @@ class UsersController extends Controller
                 ->through(fn($user) => [
                     'id' => $user->id,
                     'name' => $user->name,
-                    'email' => $user->email
+                    'email' => $user->email,
+                    'created_at' => $user->created_at,
+                    'active_status' => $user->active_status
                 ]),
 
             'filters' => Request::only(['search'])
