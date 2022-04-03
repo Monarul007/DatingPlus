@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\pH7CMS;
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -53,32 +54,32 @@ class UsersController extends Controller
             'photo' => ['nullable', 'image'],
         ]);
 
-        // User::create([
-        //     'name' => Request::get('name'),
-        //     // 'last_name' => Request::get('last_name'),
-        //     'email' => Request::get('email'),
-        //     'password' => Hash::make(Request::get('password')),
-        //     // 'owner' => Request::get('owner'),
-        //     // 'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
-        // ]);
+        User::create([
+            'name' => Request::get('name'),
+            // 'last_name' => Request::get('last_name'),
+            'email' => Request::get('email'),
+            'password' => Hash::make(Request::get('password')),
+            // 'owner' => Request::get('owner'),
+            // 'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
+        ]);
         // https://hushcupid.com/api/user/login/?private_api_key=7f894bce14da9fb1c1f0bc10948273849c6807ae&url=hushcupid.com
 
         // $response = Http::get('http://hushcupid.com/api/user/user/220/?private_api_key=7f894bce14da9fb1c1f0bc10948273849c6807ae&url=hushcupid.com');
 
-        $data = array(
-            'email' => 'myemail@hizup.uk',
-            'password' => '123456pH7CMS89'  
-        );
-        $url = "https://development.hushcupid.com/api/user/login/?private_api_key=ef45e5cd5bcbdd3c4a1c9c55eaa86ff9f722b347&url=ph7cms.com";
-        $client = new \GuzzleHttp\Client();
-        $response = $client->post($url, [
-            'headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json'],
-            'body'    => json_encode($data)
-        ]);
+        // $data = array(
+        //     'email' => 'myemail@hizup.uk',
+        //     'password' => '123456pH7CMS89'  
+        // );
+        // $url = "https://development.hushcupid.com/api/user/login/?private_api_key=ef45e5cd5bcbdd3c4a1c9c55eaa86ff9f722b347&url=ph7cms.com";
+        // $client = new \GuzzleHttp\Client();
+        // $response = $client->post($url, [
+        //     'headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json'],
+        //     'body'    => json_encode($data)
+        // ]);
          
-        // print_r(json_decode($response->getBody(), true));
+        // // print_r(json_decode($response->getBody(), true));
 
-        return Redirect::route('users')->with('success', json_decode($response->getBody(), true));
+        return Redirect::route('users')->with('success', 'User Created');
     }
 
     public function edit(User $user)
@@ -139,5 +140,35 @@ class UsersController extends Controller
         $user->restore();
 
         return Redirect::back()->with('success', 'User restored.');
+    }
+
+    public function step1(User $user){
+        Request::validate([
+            'username' => ['required', 'string', 'max:255', Rule::unique('users_info')],
+            'dob' => ['required'],
+            'sex' => ['required'],
+            'matchSex' => ['required'],
+            'bodyType' => ['required', 'array'],
+            'height' => ['required'],
+            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024']
+        ]);
+
+        $bodyType = implode(Request::get('bodyType'));
+        // UserInfo::create([
+        //     'username' => Request::get('username'),
+        //     'birthday' => Request::get('dob'),
+        //     'sex' => Request::get('sex'),
+        //     'matchSex' => Request::get('matchSex'),
+        //     'bodyType' => Request::get('bodyType'),
+        //     'height' => Request::get('height')
+        //     // 'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
+        // ]);
+
+        // if (Request::file('photo')) {
+        //     $user->update(['photo_path' => Request::file('photo')->store('profile-photos')]);
+        // }
+
+        // return Redirect::route('users')->with('success', 'Saved');
+        dd($bodyType);
     }
 }

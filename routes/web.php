@@ -109,3 +109,5 @@ Route::get('/billing-portal', function (HttpRequest $request) {
 Route::middleware(['auth:sanctum', 'verified'])->get('user/profile/step1', function () {
     return Inertia::render('Profile/StepOne');
 })->name('profile.step1');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/step1', [UsersController::class, 'step1'])->name('profile.step1.post');

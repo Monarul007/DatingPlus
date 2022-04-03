@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('user_photos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->index();
-            $table->enum('type', ['public', 'private']);
+            $table->enum('type', ['public', 'private'])->default('public');
             $table->string('photo_path', 2048);
             $table->timestamps();
         });
