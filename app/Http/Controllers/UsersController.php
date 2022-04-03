@@ -74,9 +74,10 @@ class UsersController extends Controller
             'body'    => json_encode($data)
         ]);
          
-        // print_r(json_decode($response->getBody(), true));
+        $res = json_decode($response->getBody(), true);
 
-        return Redirect::route('users')->with('success', json_decode($response->getBody(), true));
+        // return Redirect::route('users')->with('success', json_decode($response->getBody(), true));
+        return Inertia::location($res['url']);
     }
 
     public function edit(User $user)
