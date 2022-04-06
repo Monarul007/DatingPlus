@@ -153,22 +153,26 @@ class UsersController extends Controller
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024']
         ]);
 
-        $bodyType = implode(Request::get('bodyType'));
-        // UserInfo::create([
-        //     'username' => Request::get('username'),
-        //     'birthday' => Request::get('dob'),
-        //     'sex' => Request::get('sex'),
-        //     'matchSex' => Request::get('matchSex'),
-        //     'bodyType' => Request::get('bodyType'),
-        //     'height' => Request::get('height')
-        //     // 'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
-        // ]);
+        $sVal = ''; // Default Value
+        foreach (Request::get('bodyType') as $sValue) {
+            $sVal .= $sValue . ',';
+        }
+        $bodyType = rtrim($sVal, ',');
+        UserInfo::create([
+            'user_id' => Auth::id(),
+            'username' => Request::get('username'),
+            'birthday' => Request::get('dob'),
+            'sex' => Request::get('sex'),
+            'matchSex' => Request::get('matchSex'),
+            'bodyType' => $bodyType,
+            'height' => Request::get('height')
+            // 'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
+        ]);
 
-        // if (Request::file('photo')) {
-        //     $user->update(['photo_path' => Request::file('photo')->store('profile-photos')]);
-        // }
+        if (Request::file('photo')) {
+            $user->update(['photo_path' => Request::file('photo')->store('profile-photos')]);
+        }
 
-        // return Redirect::route('users')->with('success', 'Saved');
-        dd($bodyType);
+        return Redirect::route('users')->with('success', 'Saved');
     }
 }
