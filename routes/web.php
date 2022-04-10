@@ -6,7 +6,9 @@ use Inertia\Inertia;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Request;
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,7 +109,9 @@ Route::get('/billing-portal', function (HttpRequest $request) {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('user/profile/step1', function () {
-    return Inertia::render('Profile/StepOne');
+    return Inertia::render('Profile/StepOne', [
+        'userInfo' => UserInfo::find(Auth::id())
+    ]);
 })->name('profile.step1');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/step1', [UsersController::class, 'step1'])->name('profile.step1.post');
