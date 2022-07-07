@@ -4,9 +4,14 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UsersController;
+use App\Models\Photo;
 use Illuminate\Support\Facades\Request;
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +32,7 @@ Route::get('/', function () {
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
-            'step' => session('step'),
+            'phpVersion' => PHP_VERSION
         ]);
     }
 });
@@ -107,7 +111,38 @@ Route::get('/billing-portal', function (HttpRequest $request) {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('user/profile/step1', function () {
-    return Inertia::render('Profile/StepOne');
+    $user = User::where('id', Auth::id())->first();
+    if($user->profile_completion === 'Step 1'){
+        return Redirect::route('profile.step2');
+    }else{
+        return Inertia::render('Profile/StepOne', [
+            'userInfo' => UserInfo::where('user_id', Auth::id())->first(),
+        ]);
+    }
 })->name('profile.step1');
 
-Route::middleware(['auth:sanctum', 'verified'])->post('/step1', [UsersController::class, 'step1'])->name('profile.step1.post');
+Route::middleware(['auth:sanctum', 'verified'])->post('user/profile/step1/store', [UsersController::class, 'step1'])->name('user.profile.step1.store');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('user/profile/step2', function () {
+    return Inertia::render('Profile/StepTwo', [
+        'userInfo' => DB::table('users_info')->where('user_id', Auth::id())->first()
+    ]);
+})->name('profile.step2');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/step2', [UsersController::class, 'step2'])->name('profile.step2.post');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('user/profile/step3', function () {
+    return Inertia::render('Profile/StepThree', [
+        'userInfo' => DB::table('users_info')->where('user_id', Auth::id())->first()
+    ]);
+})->name('profile.step3');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/step3', [UsersController::class, 'step3'])->name('profile.step3.post');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('user/profile/step4', function () {
+    return Inertia::render('Profile/StepFour', [
+        'userInfo' => DB::table('users_info')->where('user_id', Auth::id())->first()
+    ]);
+})->name('profile.step4');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/step4', [UsersController::class, 'step4'])->name('profile.step4.store');

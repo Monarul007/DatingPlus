@@ -42,7 +42,7 @@
 
                 <!-- Username -->
                 <div class="w-full">
-                    <jet-input id="username" type="text" class="bg-gray-200 block w-full" v-model="form.username" autocomplete="username" placeholder="Username" />
+                    <jet-input id="username" type="text" class="bg-gray-200 block w-full" v-model="form.username" :readonly="username != '' " autocomplete="username"/>
                     <jet-input-error :message="form.errors.username" class="mt-2" />
                 </div>
 
@@ -58,13 +58,13 @@
                     <strong>You are a:</strong>
                     <div class="grid grid-cols-2 gap-2 w-full max-w-screen-sm">
                         <div>
-                            <input class="hidden" id="sex_1" type="radio" name="sex" checked>
+                            <input class="hidden" id="sex_1" type="radio" v-model="form.sex" value="male">
                             <label class="flex flex-col p-1 border rounded-lg border-gray-200 bg-gray-200 cursor-pointer" for="sex_1">
                                 <span class="text-center font-semibold">Male</span>
                             </label>
                         </div>
                         <div>
-                            <input class="hidden" id="sex_2" type="radio" name="sex">
+                            <input class="hidden" id="sex_2" type="radio" v-model="form.sex" value="female">
                             <label class="flex flex-col p-1 border rounded-lg border-gray-200 bg-gray-200 cursor-pointer" for="sex_2">
                                 <span class="text-center font-semibold">Female</span>
                             </label>
@@ -79,13 +79,13 @@
                     <strong>Interested In</strong>
                     <div class="grid grid-cols-2 gap-2 w-full max-w-screen-sm">
                         <div>
-                            <input class="hidden" id="matchSex_1" type="radio" name="matchSex">
+                            <input class="hidden" id="matchSex_1" type="radio" v-model="form.matchSex" value="male">
                             <label class="flex flex-col p-1 border rounded-lg border-gray-200 bg-gray-200 cursor-pointer" for="matchSex_1">
                                 <span class="text-center font-semibold">Looking for Men</span>
                             </label>
                         </div>
                         <div>
-                            <input class="hidden" id="matchSex_2" type="radio" name="matchSex" checked>
+                            <input class="hidden" id="matchSex_2" type="radio" v-model="form.matchSex" value="female">
                             <label class="flex flex-col p-1 border rounded-lg border-gray-200 bg-gray-200 cursor-pointer" for="matchSex_2">
                                 <span class="text-center font-semibold">Looking for Woman</span>
                             </label>
@@ -251,21 +251,21 @@
             SelectInput
         },
 
-        props: ['user'],
+        props: ['user', 'userInfo', 'profile_completion'],
 
         data() {
             return {
                 form: this.$inertia.form({
                     _method: 'POST',
-                    username: null,
-                    dob: null,
-                    sex: 'male',
-                    matchSex: 'female',
+                    username: this.userInfo.username ?? null,
+                    dob: this.userInfo.birthday ?? null,
+                    sex: this.userInfo.sex ?? 'male',
+                    matchSex: this.userInfo.matchSex ?? 'female',
                     photo: null,
-                    bodyType: [],
-                    height: '168',
+                    bodyType: this.userInfo.bodyType.split(',') ?? [],
+                    height: this.userInfo.height ?? '168',
                 }),
-                photoPreview: null,
+                photoPreview: null
             }
         },
 
@@ -275,7 +275,7 @@
                     this.form.photo = this.$refs.photo.files[0]
                 }
 
-                this.form.post(route('profile.step1.post'), {
+                this.form.post(route('user.profile.step1.store'), {
                     errorBag: 'updateProfileInformation',
                     preserveScroll: true,
                     onSuccess: () => (this.clearPhotoFileInput()),

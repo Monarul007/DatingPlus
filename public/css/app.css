@@ -1011,6 +1011,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }.my-4{
   margin-top: 1rem;
   margin-bottom: 1rem;
+}.my-6{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }.-my-2{
   margin-top: -0.5rem;
   margin-bottom: -0.5rem;
@@ -1234,6 +1237,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-shrink: 1;
 }.shrink-0{
   flex-shrink: 0;
+}.flex-grow{
+  flex-grow: 1;
 }.table-fixed{
   table-layout: fixed;
 }.origin-top-left{
@@ -1382,6 +1387,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }.grid-cols-2{
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}.grid-cols-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }.grid-cols-7{
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }.flex-row{
@@ -2940,6 +2947,8 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 50%;
   }.md\:w-56{
     width: 14rem;
+  }.md\:w-3\/4{
+    width: 75%;
   }.md\:flex-1{
     flex: 1 1 0%;
   }.md\:flex-shrink-0{
