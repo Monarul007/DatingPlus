@@ -137,57 +137,57 @@
                     <!-- Component Start -->
                     <strong>Height</strong>
                     <select-input v-model="form.height">
-                        <option value="120">3 ′ 11 ″ – 120 cm</option>
-                        <option value="122">4 ′ 0 ″ – 122 cm</option>
-                        <option value="124">4 ′ 1 ″ – 124 cm</option>
-                        <option value="126">4 ′ 2 ″ – 126 cm</option>
-                        <option value="128">4 ′ 2 ″ – 128 cm</option>
-                        <option value="130">4 ′ 3 ″ – 130 cm</option>
-                        <option value="132">4 ′ 4 ″ – 132 cm</option>
-                        <option value="134">4 ′ 5 ″ – 134 cm</option>
-                        <option value="136">4 ′ 6 ″ – 136 cm</option>
-                        <option value="138">4 ′ 6 ″ – 138 cm</option>
-                        <option value="140">4 ′ 7 ″ – 140 cm</option>
-                        <option value="142">4 ′ 8 ″ – 142 cm</option>
-                        <option value="144">4 ′ 9 ″ – 144 cm</option>
-                        <option value="146">4 ′ 9 ″ – 146 cm</option>
-                        <option value="148">4 ′ 10 ″ – 148 cm</option>
-                        <option value="150">4 ′ 11 ″ – 150 cm</option>
-                        <option value="152">5 ′ 0 ″ – 152 cm</option>
-                        <option value="154">5 ′ 1 ″ – 154 cm</option>
-                        <option value="156">5 ′ 1 ″ – 156 cm</option>
-                        <option value="158">5 ′ 2 ″ – 158 cm</option>
-                        <option value="160">5 ′ 3 ″ – 160 cm</option>
-                        <option value="162">5 ′ 4 ″ – 162 cm</option>
-                        <option value="164">5 ′ 5 ″ – 164 cm</option>
-                        <option value="166">5 ′ 5 ″ – 166 cm</option>
-                        <option value="168">5 ′ 6 ″ – 168 cm</option>
-                        <option value="170">5 ′ 7 ″ – 170 cm</option>
-                        <option value="172">5 ′ 8 ″ – 172 cm</option>
-                        <option value="174">5 ′ 9 ″ – 174 cm</option>
-                        <option value="176">5 ′ 9 ″ – 176 cm</option>
-                        <option value="178">5 ′ 10 ″ – 178 cm</option>
-                        <option value="180">5 ′ 11 ″ – 180 cm</option>
-                        <option value="182">6 ′ 0 ″ – 182 cm</option>
-                        <option value="184">6 ′ 0 ″ – 184 cm</option>
-                        <option value="186">6 ′ 1 ″ – 186 cm</option>
-                        <option value="188">6 ′ 2 ″ – 188 cm</option>
-                        <option value="190">6 ′ 3 ″ – 190 cm</option>
-                        <option value="192">6 ′ 4 ″ – 192 cm</option>
-                        <option value="194">6 ′ 4 ″ – 194 cm</option>
-                        <option value="196">6 ′ 5 ″ – 196 cm</option>
-                        <option value="198">6 ′ 6 ″ – 198 cm</option>
-                        <option value="200">6 ′ 7 ″ – 200 cm</option>
-                        <option value="202">6 ′ 8 ″ – 202 cm</option>
-                        <option value="204">6 ′ 8 ″ – 204 cm</option>
-                        <option value="206">6 ′ 9 ″ – 206 cm</option>
-                        <option value="208">6 ′ 10 ″ – 208 cm</option>
-                        <option value="210">6 ′ 11 ″ – 210 cm</option>
-                        <option value="212">6 ′ 11 ″ – 212 cm</option>
-                        <option value="214">7 ′ 0 ″ – 214 cm</option>
-                        <option value="216">7 ′ 1 ″ – 216 cm</option>
-                        <option value="218">7 ′ 2 ″ – 218 cm</option>
-                        <option value="220">7 ′ 3 ″ – 220 cm</option>
+                        <option value="120" :selected="form.height == '120'">3 ′ 11 ″ – 120 cm</option>
+                        <option value="122" :selected="form.height == '122'">4 ′ 0 ″ – 122 cm</option>
+                        <option value="124" :selected="form.height == '124'">4 ′ 1 ″ – 124 cm</option>
+                        <option value="126" :selected="form.height == '126'">4 ′ 2 ″ – 126 cm</option>
+                        <option value="128" :selected="form.height == '128'">4 ′ 2 ″ – 128 cm</option>
+                        <option value="130" :selected="form.height == '130'">4 ′ 3 ″ – 130 cm</option>
+                        <option value="132" :selected="form.height == '132'">4 ′ 4 ″ – 132 cm</option>
+                        <option value="134" :selected="form.height == '134'">4 ′ 5 ″ – 134 cm</option>
+                        <option value="136" :selected="form.height == '136'">4 ′ 6 ″ – 136 cm</option>
+                        <option value="138" :selected="form.height == '138'">4 ′ 6 ″ – 138 cm</option>
+                        <option value="140" :selected="form.height == '140'">4 ′ 7 ″ – 140 cm</option>
+                        <option value="142" :selected="form.height == '142'">4 ′ 8 ″ – 142 cm</option>
+                        <option value="144" :selected="form.height == '144'">4 ′ 9 ″ – 144 cm</option>
+                        <option value="146" :selected="form.height == '146'">4 ′ 9 ″ – 146 cm</option>
+                        <option value="148" :selected="form.height == '148'">4 ′ 10 ″ – 148 cm</option>
+                        <option value="150" :selected="form.height == '150'">4 ′ 11 ″ – 150 cm</option>
+                        <option value="152" :selected="form.height == '152'">5 ′ 0 ″ – 152 cm</option>
+                        <option value="154" :selected="form.height == '154'">5 ′ 1 ″ – 154 cm</option>
+                        <option value="156" :selected="form.height == '156'">5 ′ 1 ″ – 156 cm</option>
+                        <option value="158" :selected="form.height == '158'">5 ′ 2 ″ – 158 cm</option>
+                        <option value="160" :selected="form.height == '160'">5 ′ 3 ″ – 160 cm</option>
+                        <option value="162" :selected="form.height == '162'">5 ′ 4 ″ – 162 cm</option>
+                        <option value="164" :selected="form.height == '164'">5 ′ 5 ″ – 164 cm</option>
+                        <option value="166" :selected="form.height == '166'">5 ′ 5 ″ – 166 cm</option>
+                        <option value="168" :selected="form.height == '120'">5 ′ 6 ″ – 168 cm</option>
+                        <option value="170" :selected="form.height == '170'">5 ′ 7 ″ – 170 cm</option>
+                        <option value="172" :selected="form.height == '172'">5 ′ 8 ″ – 172 cm</option>
+                        <option value="174" :selected="form.height == '174'">5 ′ 9 ″ – 174 cm</option>
+                        <option value="176" :selected="form.height == '176'">5 ′ 9 ″ – 176 cm</option>
+                        <option value="178" :selected="form.height == '178'">5 ′ 10 ″ – 178 cm</option>
+                        <option value="180" :selected="form.height == '180'">5 ′ 11 ″ – 180 cm</option>
+                        <option value="182" :selected="form.height == '182'">6 ′ 0 ″ – 182 cm</option>
+                        <option value="184" :selected="form.height == '184'">6 ′ 0 ″ – 184 cm</option>
+                        <option value="186" :selected="form.height == '186'">6 ′ 1 ″ – 186 cm</option>
+                        <option value="188" :selected="form.height == '188'">6 ′ 2 ″ – 188 cm</option>
+                        <option value="190" :selected="form.height == '190'">6 ′ 3 ″ – 190 cm</option>
+                        <option value="192" :selected="form.height == '120'">6 ′ 4 ″ – 192 cm</option>
+                        <option value="194" :selected="form.height == '194'">6 ′ 4 ″ – 194 cm</option>
+                        <option value="196" :selected="form.height == '198'">6 ′ 5 ″ – 196 cm</option>
+                        <option value="198" :selected="form.height == '120'">6 ′ 6 ″ – 198 cm</option>
+                        <option value="200" :selected="form.height == '200'">6 ′ 7 ″ – 200 cm</option>
+                        <option value="202" :selected="form.height == '202'">6 ′ 8 ″ – 202 cm</option>
+                        <option value="204" :selected="form.height == '204'">6 ′ 8 ″ – 204 cm</option>
+                        <option value="206" :selected="form.height == '206'">6 ′ 9 ″ – 206 cm</option>
+                        <option value="208" :selected="form.height == '208'">6 ′ 10 ″ – 208 cm</option>
+                        <option value="210" :selected="form.height == '210'">6 ′ 11 ″ – 210 cm</option>
+                        <option value="212" :selected="form.height == '212'">6 ′ 11 ″ – 212 cm</option>
+                        <option value="214" :selected="form.height == '214'">7 ′ 0 ″ – 214 cm</option>
+                        <option value="216" :selected="form.height == '216'">7 ′ 1 ″ – 216 cm</option>
+                        <option value="218" :selected="form.height == '218'">7 ′ 2 ″ – 218 cm</option>
+                        <option value="220" :selected="form.height == '220'">7 ′ 3 ″ – 220 cm</option>
                     </select-input>
                     <jet-input-error :message="form.errors.height" class="mt-2" />
                 </div>
@@ -236,6 +236,7 @@
     import JetActionMessage from '@/Jetstream/ActionMessage.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
     import SelectInput from '@/Shared/SelectInput.vue'
+    import moment from 'moment'
 
     export default defineComponent({
         components: {
@@ -248,9 +249,9 @@
             JetInputError,
             JetLabel,
             JetSecondaryButton,
-            SelectInput
+            SelectInput,
+            moment
         },
-
         props: ['user', 'userInfo', 'profile_completion'],
 
         data() {

@@ -45,6 +45,7 @@
         "@themesberg/tailwind-datepicker": "^1.1.0",
         "@vuepic/vue-datepicker": "^3.0.0",
         "flowbite": "^1.4.1",
+        "moment": "^2.29.2",
         "tailwindcss-animation-delay": "^1.0.7",
         "vue-media-upload": "^1.1.4",
         "vue3-datepicker": "^0.3.2"
